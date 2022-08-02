@@ -1,0 +1,21 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-yeezus2-dev-193035-authRole",
+      "UnauthRoleArn": "arn:aws:iam::109246226078:role/amplify-yeezus2-dev-193035-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::109246226078:role/amplify-yeezus2-dev-193035-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-yeezus2-dev-193035-deployment",
+      "UnauthRoleName": "amplify-yeezus2-dev-193035-unauthRole",
+      "StackName": "amplify-yeezus2-dev-193035",
+      "StackId": "arn:aws:cloudformation:us-east-1:109246226078:stack/amplify-yeezus2-dev-193035/1d08e560-12bb-11ed-a31d-0ae9dcd6ef5f",
+      "AmplifyAppId": "dpx9x3wr1nzuo"
+    },
+    "categories": {
+      "auth": {
+        "yeezus2c4bfab7cc4bfab7c": {},
+        "true": {}
+      }
+    }
+  }
+}

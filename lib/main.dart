@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import './screens/homepage.dart';
-
+import './screens/gps_page.dart';
+import './screens/loginPage.dart';
+import './screens/signUp.dart';
+import './components/auth_service.dart';
+import './screens/verification_page.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -27,69 +30,53 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  String _username ="";
-  String _password ="";
-  String _message="";
-  bool move =false;
-  void validateAuth(){
-    if(_username == "admin " && _password == "password "){
-      move=true;
-    }
-
+  final _authService = AuthService();
+  @override
+  void initState() {
+    super.initState();
+    _authService.showLogin();
   }
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
+    return MaterialApp(
+      title: 'Workshop App',
+      theme: ThemeData(visualDensity: VisualDensity.adaptivePlatformDensity),
+      home: StreamBuilder<AuthState>(
+      stream: _authService.authStateController.stream,
+      builder: (context, snapshot) {
+      if (snapshot.hasData) {
+        return Navigator(
+          pages: [
 
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-          //create a textfield
-            TextField(
-            decoration: const InputDecoration(
-              hintText: "Enter username"
-            ),
-            onChanged: (text){
-              setState(() {
-                _username=text;
-              });
-            },
+            if (snapshot.data!.authFlowStatus == AuthFlowStatus.login)
+              MaterialPage(
+                  child: LoginPage(
+                      didProvideCredentials: _authService.loginWithCredentials,
+                      shouldShowSignUp: _authService.showSignUp)),
+            if (snapshot.data!.authFlowStatus == AuthFlowStatus.signUp)
+              MaterialPage(
+                  child: SignUpPage(
+                      didProvideCredentials: _authService.signUpWithCredentials,
+                      shouldShowLogin: _authService.showLogin)),
 
-          ), //username
-            TextField(
-              decoration: const InputDecoration(
-                  hintText: "Enter password"
-              ),
-              onChanged: (text){
-                setState(() {
-                  _password=text;
-                });
-              },
+            if (snapshot.data!.authFlowStatus == AuthFlowStatus.verification)
+              MaterialPage(child: VerificationPage(
+                  didProvideVerificationCode: _authService.verifyCode)),
 
-            ),//password
-            ElevatedButton(
-                onPressed: () {
-                  validateAuth();
-                  if(move){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
-                  }
-                },
-                child: Text("Login")
-            ) //login button
+            if (snapshot.data!.authFlowStatus == AuthFlowStatus.session)
+              MaterialPage(
+                  child: GpsPage(shouldLogOut: _authService.logOut))
           ],
-        ),
-      ),
+          onPopPage: (route, result) => route.didPop(result),
+        );
+      } else {
+        // 6
+        return Container(
+          alignment: Alignment.center,
+          child: CircularProgressIndicator(),
+        );
+      }
+    }),
     );
   }
 }
