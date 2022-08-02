@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/yeezus.iml" filepath="$PROJECT_DIR$/yeezus.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/yeezus_android.iml" filepath="$PROJECT_DIR$/android/yeezus_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yeezus2.iml" filepath="$PROJECT_DIR$/yeezus2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/yeezus2_android.iml" filepath="$PROJECT_DIR$/android/yeezus2_android.iml" />
     </modules>
   </component>
 </project>
