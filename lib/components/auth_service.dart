@@ -1,49 +1,82 @@
 import 'dart:async';
 import './auth_credientials.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 // 1
-enum AuthFlowStatus { login, signUp, verification, session }
+enum AuthFlowStatus { login, signUp,loggedIn, endSession }
 
 // 2
 class AuthState {
-  final AuthFlowStatus? authFlowStatus;
+  static AuthFlowStatus authFlowStatus = AuthFlowStatus.login;
 
-  AuthState({this.authFlowStatus});
+  final FirebaseAuth fauth = FirebaseAuth.instance;
+  static UserCredential? cred;
+
+  get auth => fauth;
+
+  void setAuthState(AuthFlowStatus change) {
+    authFlowStatus = change;
+  }
+
+  AuthFlowStatus getAuthState() {
+    return authFlowStatus;
+  }
+
+  void setUserCred(UserCredential param) {
+    cred = param;
+  }
+
+  UserCredential? getUserCred() {
+    return cred;
+  }
 }
-
 // 3
 class AuthService {
   // 4
-  final authStateController = StreamController<AuthState>();
+  //final authStateController = StreamController<AuthState>();
+  AuthState authState = AuthState();
 
-  // 5
+
   void showSignUp() {
-    final state = AuthState(authFlowStatus: AuthFlowStatus.signUp);
-    authStateController.add(state);
+    authState.setAuthState(AuthFlowStatus.signUp);
   }
 
-  // 6
   void showLogin() {
-    final state = AuthState(authFlowStatus: AuthFlowStatus.login);
-    authStateController.add(state);
+    authState.setAuthState(AuthFlowStatus.login);
   }
 
 // 1
-  void loginWithCredentials(AuthCredentials credentials) {
-    final state = AuthState(authFlowStatus: AuthFlowStatus.session);
-    authStateController.add(state);
+  Future<bool> loginWithCredentials(AuthCredentials credentials) async {
+
+    try {
+      final authResult = await authState.auth.signInWithEmailAndPassword(
+          email: credentials.username, password: credentials.password);
+      print(authResult.runtimeType);
+      print(authResult);
+      print(authResult.user);
+      authState.setUserCred(authResult);
+      authState.setAuthState(AuthFlowStatus.loggedIn);
+      return true;
+    }
+    catch (e) {
+      print(e);
+      return false;
+    }
+    return true;
   }
 
 // 2
-  void signUpWithCredentials(SignUpCredentials credentials) {
-    final state = AuthState(authFlowStatus: AuthFlowStatus.verification);
-    authStateController.add(state);
+  Future<bool> signUpWithCredentials(SignUpCredentials credentials) async{
+
+    try{
+      final authResult = await authState.auth.createUserWithEmailAndPassword(
+          email: credentials.email, password: credentials.password);
+    }catch(e){
+      print(e); return false;
+    }
+   return true;
   }
-  void verifyCode(String verificationCode) {
-    final state = AuthState(authFlowStatus: AuthFlowStatus.session);
-    authStateController.add(state);
-  }
+
   void logOut() {
-    final state = AuthState(authFlowStatus: AuthFlowStatus.login);
-    authStateController.add(state);
+    authState.setAuthState(AuthFlowStatus.endSession);
   }
 }

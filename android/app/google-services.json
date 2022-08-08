@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "515151266891",
+    "firebase_url": "https://my-portfolio-5f576-default-rtdb.firebaseio.com",
+    "project_id": "my-portfolio-5f576",
+    "storage_bucket": "my-portfolio-5f576.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:515151266891:android:98793c0fa08438baea39ce",
+        "android_client_info": {
+          "package_name": "com.example.yeezus2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "515151266891-9h2tc82bbfcsba2hr645fo5aqp6a31v0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7nw0dCooV8IvUbINhU2Eyh2Qk82lq3Go"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "515151266891-9h2tc82bbfcsba2hr645fo5aqp6a31v0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "515151266891-2qrattakte6l8t7tkfvmae4lp06jtjjl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.yeezus2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:515151266891:android:efae6cda1dc05ebfea39ce",
+        "android_client_info": {
+          "package_name": "com.souvikbiswas.flutterfire_samples"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "515151266891-9h2tc82bbfcsba2hr645fo5aqp6a31v0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7nw0dCooV8IvUbINhU2Eyh2Qk82lq3Go"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "515151266891-9h2tc82bbfcsba2hr645fo5aqp6a31v0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "515151266891-2qrattakte6l8t7tkfvmae4lp06jtjjl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.yeezus2"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
